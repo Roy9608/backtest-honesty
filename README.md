@@ -1,15 +1,20 @@
 # Backtest Honesty Check
 
-English | [简体中文](README.zh-CN.md)
+**English** · [中文](README.zh-CN.md)
 
 **Before you say "this strategy makes money," run these 14 checks first.**
 
-The most dangerous thing about a backtest report is not a calculation error — it's **mistaking the market's drift for your own skill**.
-This repository provides a check-list workflow for catching exactly that, before you ever report a "positive return" conclusion.
-
 ---
 
-## What problem does this repository solve?
+## 1. What this is
+
+The most dangerous thing about a backtest report is not a calculation error — it's **mistaking the market's drift for your own skill**. This repository provides a check-list workflow for catching exactly that, before you ever report a "positive return" conclusion.
+
+It is written for two people: the one **producing** a backtest report, and the one **reviewing** someone else's. If you are about to write "this strategy works" in either role, this repository is for you. It is documentation only — there is nothing to install and nothing to run.
+
+## 2. What problem does this repository solve?
+
+**The answer, first:** a positive backtest is usually not skill. It is the market drifting — call it β — while your strategy is along for the ride. Subtract that drift, compare what is left against your per-trade cost, and most "profitable" strategies stop being profitable at that step. The five symptoms below look like five different discoveries; they have one cause:
 
 A positive backtest has five common causes. Only one of them is real:
 
@@ -25,9 +30,7 @@ A positive backtest has five common causes. Only one of them is real:
 
 The 14 iron laws in this repository turn each of these situations into an executable check.
 
----
-
-## Quick start
+## 3. Quick start
 
 ### If you have 5 minutes
 
@@ -39,15 +42,21 @@ These three rules catch the most problems:
 
 ### If you're producing a full backtest report
 
-Work through the [checklist](docs/checklist.md) item by item, with the table templates in the [output format](docs/output-format.md).
+Work through the [checklist](docs/checklist.md) item by item, with the table templates in the [output format](docs/output-format.md). That filled-in table, plus the checklist ticked honestly, **is** the self-check this repository gives you — there is no script to run.
 
 ### If you're reviewing someone else's backtest
 
 Start from [common misjudgment patterns](docs/misjudgment-patterns.md) and check one by one.
 
----
+### If you want to change it
 
-## The 14 iron laws
+Plain Markdown, no build step, no dependencies, nothing to install: edit a file and re-read it. The repository ships no executable code and no test suite.
+
+### If you're an AI agent
+
+Read [`AGENTS.md`](AGENTS.md) first — it is the contract for what you may and may not do here.
+
+## 4. The 14 iron laws
 
 ### Group 1: Return attribution (the most fundamental)
 
@@ -88,9 +97,7 @@ Start from [common misjudgment patterns](docs/misjudgment-patterns.md) and check
 |---|---|---|
 | 6 | [Run a semantic-consistency check before shipping documents](docs/06-semantic-consistency.md) | Old conclusions read punchier; readers will trust them first |
 
----
-
-## Where this comes from
+## 5. Where this comes from
 
 Not copied from a textbook.
 
@@ -104,9 +111,7 @@ The final conclusion: the signal had **zero information content and must not go 
 
 An honestly documented failed experiment is more useful than a successful one.
 
----
-
-## The core method: four-way return decomposition
+## 6. The core method: four-way return decomposition
 
 The single most valuable item in this repository.
 
@@ -138,23 +143,46 @@ A real measurement makes the point: the same strategy in two different market wi
 > In a falling market, a dip commonly mean-reverts (oversold bounce); in a rising market, a dip means the trend broke (regime change).
 > **The same action means opposite things in the two regimes.**
 
----
-
-## How to use this
+## 7. How to use this
 
 1. **Don't expect it to raise your returns.** Its job is to make you stop early when you're heading the wrong way.
 2. **Read the rules in order; don't skip.** The first few are prerequisites for the later ones.
 3. **Actually tick the checklist.** "This should be fine" is the most dangerous sentence in backtesting.
 
----
+## 8. Boundaries and non-applicability
+
+What this repository deliberately does **not** contain:
+
+- Any backtesting code, framework, library, or runnable script — it is Markdown documents and a checklist, nothing else
+- Any strategy logic, trading parameters, or instrument information
+- Any performance data or live-trading results
+- Any identifying details of the source project
+
+All details of the source research project have been desensitised.
+
+Honest limits, stated up front:
+
+- **It does not give a profitability verdict.** The checks narrow what you know; they are not a promise that a strategy will make money.
+- **These 14 laws come from one real research project** — three years of tick-level data, hundreds of controlled experiments, desensitised. A field report plus a checklist, not an industry standard.
+- **The project this came from ended in a negative result**: the signal had zero information content and must not go live. Passing all 14 checks does not overturn that class of verdict.
+- **It does not replace domain judgement.** Several criteria depend on knowing the strategy type (rule 5); the repository cannot pick the right ruler for you.
+- **It does not apply if what you want is a profitability verdict or a tool to plug in.** There is no alpha here, and nothing to install.
+
+**A useful criterion for whether this repository applies to you:** can you state, right now, your β baseline for the same holding period as your strategy, and your measured per-trade cost? If either is missing, start at rule 1 and rule 4 — nothing downstream can be trusted until they exist.
 
 ## Language note
 
 The detailed rule-by-rule write-ups under `docs/` are currently **in Chinese only**.
 This README is self-contained for the core method; if you machine-translate the docs, watch for terminology drift.
 
----
-
 ## License
 
 MIT — use freely, no attribution required. If it saves you from one expensive mistake, that's enough.
+
+## More from this author
+
+- [live-trading-bot-reliability](https://github.com/Roy9608/live-trading-bot-reliability)
+- [blackbox-indicator-reverse](https://github.com/Roy9608/blackbox-indicator-reverse)
+- [macro-radar](https://github.com/Roy9608/macro-radar)
+
+More at [@Roy9608](https://github.com/Roy9608).
